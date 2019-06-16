@@ -1,0 +1,14 @@
+﻿@{ ViewBag.Title = "Inicio"; }
+<div class="jumbotron text-center rounded-0">
+  <h1 class="display-4">Comienza aquí</h1>
+  @if (Request.IsAuthenticated)
+  {
+    <p class="lead">Gracias por autenticarte.</p>
+    <a href="#" class="btn btn-secondary btn-lg my-sm-0"><i class="mr-2 pb-1" data-feather="file-text"></i>Documentación</a>
+  }
+  else
+  {
+    <p class="lead">Inicia sesión antes de continuar.</p>
+    <a class="btn btn-primary btn-lg my-sm-0" href="@Url.Action(actionName: "Login", controllerName: "Account", routeValues: null)"><i class="mr-2 pb-1" data-feather="log-in"></i>Acceder</a>
+  }
+</div>

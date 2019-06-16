@@ -1,0 +1,151 @@
+﻿@model IEnumerable<prjHospital.Models.PersonaModel>
+@{
+  ViewBag.Title = "Pacientes";
+}
+@section StyleSheets {
+  <!-- dataTables.bootstrap4 1.10.19 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/datatables.net-bs4@1.10.19/css/dataTables.bootstrap4.min.css" integrity="sha256-F+DaKAClQut87heMIC6oThARMuWne8+WzxIDT7jXuPA=" crossorigin="anonymous">
+  <!-- dataTables.buttons.bootstrap4 1.10.19 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/datatables.net-buttons-bs4@1.5.6/css/buttons.bootstrap4.min.css" integrity="sha256-njo807dUiyYW575DjLvTj8dyXb4MOOVe7rR+png6FBw=" crossorigin="anonymous">
+}
+
+<div class="jumbotron text-center rounded-0 mb-3">
+  <h1 class="display-4">Pacientes</h1>
+  <div class=" no-print">
+    <a class="btn btn-success btn-lg my-sm-0" href="@Url.Action(actionName: "Create")"><i class="mr-2 pb-1" data-feather="plus"></i>Crear</a>
+    <a class="btn btn-primary btn-lg my-sm-0" href="#" onclick="window.print()"><i class="mr-2 pb-1" data-feather="printer"></i>Imprimir</a>
+  </div>
+</div>
+<div class="container-fluid">
+  <table class="table table-bordered table-striped" id="table">
+    <thead>
+      <tr>
+        <th class="text-center" scope="col">
+          @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th scope="col">
+          @Html.DisplayNameFor(model => model.Nombres)
+        </th>
+        <th scope="col">
+          @Html.DisplayNameFor(model => model.ApellidoPaterno)
+        </th>
+        <th scope="col">
+          @Html.DisplayNameFor(model => model.ApellidoMaterno)
+        </th>
+        <th scope="col">
+          @Html.DisplayNameFor(model => model.FechaNacimiento)
+        </th>
+        <th scope="col">
+          Edad
+        </th>
+        <th scope="col">
+          @Html.DisplayNameFor(model => model.CedulaIdentidad)
+        </th>
+        <th scope="col">
+          @Html.DisplayNameFor(model => model.Sexo)
+        </th>
+        <th class="no-print" scope="col">
+          Opciones
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var item in Model)
+      {
+        <tr>
+          <th class="align-middle text-center" scope="row">
+            @Html.DisplayFor(modelItem => item.Id)
+          </th>
+          <td class="align-middle">
+            @Html.DisplayFor(modelItem => item.Nombres)
+          </td>
+          <td class="align-middle">
+            @Html.DisplayFor(modelItem => item.ApellidoPaterno)
+          </td>
+          <td class="align-middle">
+            @Html.DisplayFor(modelItem => item.ApellidoMaterno)
+          </td>
+          <td class="align-middle">
+            @Html.DisplayFor(modelItem => item.FechaNacimiento)
+          </td>
+          <td class="align-middle">
+            @Html.DisplayFor(modelItem => item.Edad)
+          </td>
+          <td class="align-middle">
+            @Html.DisplayFor(modelItem => item.CedulaIdentidad)
+          </td>
+          <td class="align-middle">
+            @Html.DisplayFor(modelItem => item.Sexo.Nombre)
+          </td>
+          <td class="align-middle text-center no-print">
+            <a class="btn text-primary" href="@Url.Action(actionName: "Edit", routeValues: new { id = item.Id })"><i class="pb-1" data-feather="edit"></i></a>
+            <a class="btn text-secondary" href="@Url.Action(actionName: "Details", routeValues: new { id = item.Id })"><i class="pb-1" data-feather="printer"></i></a>
+            <a class="btn text-danger" href="@Url.Action(actionName: "Delete", routeValues: new { id = item.Id })"><i class="pb-1" data-feather="trash"></i></a>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+@section Scripts {
+  <!-- dataTables 1.10.19-->
+  <script src="https://cdn.jsdelivr.net/npm/datatables.net@1.10.19/js/jquery.dataTables.min.js" integrity="sha256-t5ZQTZsbQi8NxszC10CseKjJ5QeMw5NINtOXQrESGSU=" crossorigin="anonymous"></script>
+  <!-- dataTables.bootstrap4 1.10.19 -->
+  <script src="https://cdn.jsdelivr.net/npm/datatables.net-bs4@1.10.19/js/dataTables.bootstrap4.min.js" integrity="sha256-hJ44ymhBmRPJKIaKRf3DSX5uiFEZ9xB/qx8cNbJvIMU=" crossorigin="anonymous"></script>
+  <!-- dataTables.buttons 1.5.6 -->
+  <script src="https://cdn.jsdelivr.net/npm/datatables.net-buttons@1.5.6/js/dataTables.buttons.min.js" integrity="sha256-eVTWBZySMSogbnxdpvlj17+p40Vg5PxryMchcNGEiZk=" crossorigin="anonymous"></script>
+  <!-- dataTables.buttons.bootstrap4 1.5.6 -->
+  <script src="https://cdn.jsdelivr.net/npm/datatables.net-buttons-bs4@1.5.6/js/buttons.bootstrap4.min.js" integrity="sha256-iqSOQ87zVn21cYG1ayjFwiq5bhv7LOFlLRIb6JCfVwY=" crossorigin="anonymous"></script>
+  <!-- jszip 3.2.0 -->
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.2.0/dist/jszip.min.js" integrity="sha256-VwkT6wiZwXUbi2b4BOR1i5hw43XMzVsP88kpesvRYfU=" crossorigin="anonymous"></script>
+  <!-- dataTables.buttons.html5 1.5.6 -->
+  <script src="https://cdn.jsdelivr.net/npm/datatables.net-buttons@1.5.6/js/buttons.html5.min.js" integrity="sha256-Y4TCqdC9d5Srolfcf9UL2Jbb3mz4lGCIpae0kCkcBUo=" crossorigin="anonymous"></script>
+  <!-- dataTables.buttons.flash 1.5.6 -->
+  <script src="https://cdn.jsdelivr.net/npm/datatables.net-buttons@1.5.6/js/buttons.flash.min.js" integrity="sha256-cR5JPzKqV52boupVw5odXlSxHNu69UvdVucXc6ae3xg=" crossorigin="anonymous"></script>
+  @*<script src="https://cdn.jsdelivr.net/npm/datatables.net-buttons@1.5.6/js/buttons.print.min.js" integrity="sha256-Q8nGY82s7O2658kTOGeD4TY7yPvcmkxhO00av5ioP5U=" crossorigin="anonymous"></script>*@
+  @*<script src="https://cdn.jsdelivr.net/npm/datatables.net-buttons@1.5.6/js/buttons.colVis.min.js" integrity="sha256-0JAfzrNTpY5avk717f3gVcgAekxoycnhFFDZ0+UZwFg=" crossorigin="anonymous"></script>*@
+  @*<script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.53/build/pdfmake.min.js" integrity="sha256-Xon5hF/CqTXIN9zXCJpZrwnN6P/b8YZt//YhFS/HRpA=" crossorigin="anonymous"></script>*@
+  @*<script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.53/build/vfs_fonts.js" integrity="sha256-vEmrkqA2KrdjNo0/IWMNelI6jHuWAOkIJxGf88r4iic=" crossorigin="anonymous"></script>*@
+  <!-- dataTable -->
+  <script>
+    $(document).ready(function () {
+      var table = $('#table').DataTable({
+        language: {
+          "decimal": ".",
+          "emptyTable": "No hay datos que mostrar",
+          "info": "_TOTAL_ registro(s)", //"Mostrando desde _START_ a _END_ de _TOTAL_ registros",
+          "infoEmpty": "No hay datos que mostrar",
+          "infoFiltered": "(filtrado de _MAX_ registros)",
+          "infoPostFix": "",
+          "thousands": ",",
+          "lengthMenu": "Mostrar _MENU_ registros",
+          "loadingRecords": "Cargando...",
+          "processing": "Procesando...",
+          "search": "Búsqueda",
+          "zeroRecords": "No hay resultados de la búsqueda",
+          "paginate": {
+            "first": "Primero",
+            "last": "Último",
+            "next": "Siguiente",
+            "previous": "Anterior"
+          }
+        },
+        buttons: [
+          //'pdf',
+          { extend: 'copy', text: 'Copiar' },
+          { extend: 'excel', className: 'btn-success' }
+        ],
+        dom: "<\"d-md-flex justify-content-between text-center no-print mb-3\"flB>r<\"table-responsive\"<t>>ip",
+        lengthChange: false,
+        //info: false,
+        paging: false,
+        select: true
+      });
+      $('#table_filter').addClass('my-md-auto');
+      $('#table_filter label').addClass('m-0');
+      $('#table_wrapper .dt-buttons').addClass('mt-3 mt-md-0 mb-0');
+      $('#table_wrapper .dt-buttons').removeClass('dt-buttons');
+      $('#table_info').addClass('text-center p-0 mt-3');
+    });
+  </script>
+}

@@ -1,0 +1,44 @@
+﻿@using prjHospital.Models
+@model LoginViewModel
+@{ ViewBag.Title = "Iniciar Sesión"; }
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-lg-6 mx-auto">
+      @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "loginForm", @class = "form-horizontal", role = "form" }))
+      {
+        @Html.AntiForgeryToken()
+        <h1 class="display-4">Iniciar sesión</h1>
+        <p class="lead">Por favor, introduce tus credenciales.</p>
+        <hr />
+        @Html.ValidationSummary(excludePropertyErrors: true, message: "", htmlAttributes: new { @class = "text-danger" })
+        <div class="form-group">
+          @Html.LabelFor(m => m.Email)
+          @Html.TextBoxFor(m => m.Email, htmlAttributes: new { @class = "form-control", placeholder = "mi@correo.com" })
+          @Html.ValidationMessageFor(m => m.Email, validationMessage: "", htmlAttributes: new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+          @Html.LabelFor(m => m.Password)
+          @Html.PasswordFor(m => m.Password, htmlAttributes: new { @class = "form-control", placeholder = "••••••••••" })
+          @Html.ValidationMessageFor(m => m.Password, validationMessage: "", htmlAttributes: new { @class = "text-danger" })
+        </div>
+        <div class="text-center">
+          <div class="form-group">
+            @Html.CheckBoxFor(m => m.RememberMe)
+            @Html.LabelFor(m => m.RememberMe)
+          </div>
+          <a href="@Url.Action(actionName: "Register", controllerName: "Account", routeValues: null)" class="btn btn-secondary mb-2 mr-2"><i class="mr-2 pb-1" data-feather="user-plus"></i>Inscripción</a>
+          <button type="submit" class="btn btn-primary mb-2"><i class="mr-2 pb-1" data-feather="log-in"></i>Acceder</button>
+        </div>
+        @* Enable this once you have account confirmation enabled for password reset functionality
+      <p>
+          @Html.ActionLink("Forgot your password?", "ForgotPassword")
+      </p>
+        *@
+      }
+    </div>
+  </div>
+</div>
+@section Scripts {
+  <!-- jquery-validation 1.19.0 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js" integrity="sha256-bu/BP02YMudBc96kI7yklc639Mu4iKGUNNcam8D2nLc=" crossorigin="anonymous"></script>
+}
